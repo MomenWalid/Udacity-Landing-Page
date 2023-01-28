@@ -1,0 +1,480 @@
+/*
+ *
+ * CSS written based on SMACSS architecture.
+ * To learn more, visit: http://smacss.com/
+ * 
+ * For simplicity, no reset or normalize is added. 
+ * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
+ *
+*/
+
+/* ---- Base Rules ---- */
+
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    background: rgb(136, 203, 171);
+    background: linear-gradient(0deg,
+            rgb(58, 149, 154) 0%,
+            rgb(34, 87, 91) 100%);
+    margin: 0;
+    font-family: "Merriweather", serif;
+    color: #fff;
+}
+
+/* Typeography General*/
+h1 {
+    font-family: "Fira Sans", sans-serif;
+    font-size: 3em;
+    margin: 2em 1rem;
+}
+
+@media only screen and (min-width: 35em) {
+    h1 {
+        font-size: 7em;
+        margin: 1em 4rem 1em;
+    }
+}
+
+section h2 {
+    border-bottom: 1px solid #cc1;
+    font-family: "Oxygen", Sans-Serif;
+    font-size: 3em;
+    color: #fff;
+}
+
+p {
+    line-height: 1.6em;
+    color: #eee;
+}
+
+/* ---- Layout Rules ---- */
+main {
+    margin: 20vh 1em 10vh;
+}
+
+.main-hero {
+    min-height: 40vh;
+    padding-top: 3em;
+}
+
+section {
+    position: relative;
+    min-height: 80vh;
+}
+
+/* ---- Module Rules ---- */
+
+/* Navigation Styles*/
+.navbar_menu ul {
+    padding-left: 0;
+    margin: 0;
+    text-align: right;
+}
+
+.navbar_menu li {
+    display: inline-block;
+}
+
+.navbar_menu .menu_link {
+    display: block;
+    padding: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    scroll-behavior: smooth;
+    transition: 0.3s;
+}
+
+.navbar_menu .menu_link:hover {
+    background: #333;
+    color: #fff;
+}
+
+.navbar_menu .menu_link.active {
+    background: #333;
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    .navbar_menu .menu_link {
+        font-size: 14px;
+        padding: 1em 0.5em;
+    }
+}
+
+/* Header Styles */
+.page_header {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+/* Footer Styles */
+.page_footer {
+    background: #000;
+    padding: 3em;
+    color: #fff;
+}
+
+.page_footer p {
+    color: #fff;
+}
+
+/* ---- Theme Rules ---- */
+/* Landing Container Styles */
+.landing_container {
+    padding: 1em;
+    text-align: left;
+}
+
+@media only screen and (min-width: 35em) {
+    .landing_container {
+        max-width: 50em;
+        padding: 4em;
+    }
+}
+
+section:nth-of-type(even) .landing_container {
+    margin-right: 0;
+    margin-left: auto;
+    text-align: right;
+}
+
+/* Background Circles */
+/* Note that background circles are created with psuedo elements before and after */
+/* Circles appear to be random do to use of :nth-of-type psuedo class */
+section:nth-of-type(odd) .landing_container::before {
+    content: "";
+    background: rgba(255, 255, 255, 0.187);
+    position: absolute;
+    z-index: -5;
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+section:nth-of-type(even) .landing_container::before {
+    content: "";
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.2) 100%);
+    position: absolute;
+    top: 3em;
+    right: 3em;
+    z-index: -5;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n) .landing_container::after {
+    content: "";
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.2) 100%);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -5;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n + 1) .landing_container::after {
+    content: "";
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.2) 100%);
+    position: absolute;
+    right: 20vw;
+    bottom: -5em;
+    z-index: -5;
+    width: 15vh;
+    height: 15vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+/* ---- Theme State Rules ---- */
+/* Section Active Styles */
+/* Note: active class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
+section.active {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(0deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+section.active .landing_container::before {
+    opacity: 1;
+    animation: rotate 4s linear 0s infinite forwards;
+}
+
+section.active .landing_container::after {
+    opacity: 1;
+    animation: rotate 5s linear 0s infinite forwards reverse;
+}
+
+.up {
+    position: fixed;
+    bottom: 10px;
+    right: -100px;
+    background-color: #ff5722;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.up.show {
+    right: 10px;
+}
+
+/* Section Active Styles Keyframe Animations */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg) translate(-1em) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translate(-1em) rotate(-360deg);
+    }
+}
+
+/* add and delete section  */
+
+.btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 200px;
+}
+
+.btns button {
+    padding: 10px 5px;
+    cursor: pointer;
+    width: 200px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    opacity: 0.5;
+}
+
+.btns button span {
+    font-size: 25px;
+}
+
+.btns .add {
+    border-radius: 10px 0 10px 0;
+    background-color: #2196f3;
+}
+
+.btns .add:hover {
+    opacity: 1;
+}
+
+.btns .del:hover {
+    opacity: 1;
+}
+
+.btns .del {
+    border-radius: 0 10px 0 10px;
+    background-color: #e91e63;
+}
+
+@media (max-width: 767px) {
+    .btns {
+        gap: 60px;
+    }
+
+    .btns button {
+        font-size: 15px;
+        width: 125px;
+    }
+
+    .btns button span {
+        font-size: 16px;
+    }
+}
+
+/* add section form */
+
+.add-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 400px;
+    background-color: #fff;
+    z-index: 1;
+    color: #000;
+    padding: 25px;
+    border-radius: 4px;
+    display: none;
+}
+
+.add-section label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.add-section input,
+.add-section #description {
+    display: block;
+    padding: 15px;
+    margin-bottom: 40px;
+    width: 100%;
+    background-color: #f9f9f9;
+    border: none;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 18px;
+}
+
+.add-section #description {
+    height: 150px;
+    resize: none;
+}
+
+.add-section .btn {
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    font-size: 18px;
+    width: 100px;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
+
+.add-section .btns-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-section .btns-section .confirm {
+    background-color: #2196f3;
+}
+
+.add-section .btns-section .cancel {
+    background-color: #e91e63;
+}
+
+@media (max-width: 767px) {
+    .add-section {
+        width: 250px;
+    }
+
+    .add-section input::placeholder,
+    .add-section #description::placeholder {
+        font-size: 12px;
+    }
+
+    .add-section .btns-section {
+        gap: 70px;
+    }
+}
+
+
+/* Delete Section */
+
+
+.del-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 200px;
+    background-color: #fff;
+    z-index: 1;
+    color: #000;
+    padding: 25px;
+    border-radius: 4px;
+    display: none;
+}
+
+.del-section label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.del-section input{
+    display: block;
+    padding: 15px;
+    margin-bottom: 40px;
+    width: 100%;
+    background-color: #f9f9f9;
+    border: none;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 18px;
+}
+
+
+.del-section .btn {
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    font-size: 18px;
+    width: 100px;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
+
+.del-section .btns-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.del-section .btns-section .confirm {
+    background-color: #2196f3;
+}
+
+.del-section .btns-section .cancel {
+    background-color: #e91e63;
+}
+
+@media (max-width: 767px) {
+    .del-section {
+        width: 250px;
+    }
+
+    .del-section input::placeholder {
+        font-size: 10px;
+    }
+
+    .del-section .btns-section {
+        gap: 70px;
+    }
+}
+
+
+
