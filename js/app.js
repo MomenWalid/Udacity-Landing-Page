@@ -58,6 +58,8 @@ addSection.onclick = function(){
         document.querySelector('.add-section').style.display = 'none';
         addSection.style.opacity = '0.5';
 
+        createLiNav();
+        
         Swal.fire('You don\'t  Add  Section','You can Add Section Later','error');
 
     }
